@@ -135,7 +135,7 @@ class Employee extends Person {
             }
         }
 
-        if (employeeId.length() != 4 || employeeId.charAt(0) != 'E' || employeeId.charAt(0) != 'e') return null;
+        if (employeeId.length() != 4 || (employeeId.charAt(0) != 'E' && employeeId.charAt(0) != 'e')) return null;
         else {
             for (int i=1; i<employeeId.length(); i++) {
                 if ( !Character.isDigit(employeeId.charAt(i)) ) {
