@@ -1,13 +1,14 @@
 import java.util.ArrayList;
 
 public class Order {
-    private static int orderId = 0;
+    private static int lastOrderId = 0;
+    private int orderId;
     private Customer customer;
     private ArrayList<MenuItem> items;
     private double totalAmount;
 
     Order(Customer customer) {
-        this.orderId++;
+        this.orderId = ++lastOrderId;
         this.customer = customer;
         this.items = new ArrayList<MenuItem>();
     }
@@ -21,8 +22,9 @@ public class Order {
         for (MenuItem item : items) {
             totalAmount += item.getPrice();
         }
+        double temp = totalAmount;
         totalAmount = customer.getDiscount(totalAmount);
-        customer.addLoyaltyPoints(totalAmount);
+        customer.addLoyaltyPoints(temp);
         return totalAmount;
     }
 
