@@ -36,10 +36,10 @@ class Customer extends Person {
     private String customerId;
     private int loyaltyPoints;
 
-    private Customer(String name, String phone, String customerId, int loyaltyPoints) {
+    private Customer(String name, String phone, String customerId) {
         super(name, phone);
         this.customerId =  customerId;
-        this.loyaltyPoints = loyaltyPoints;
+        this.loyaltyPoints = 0;
     }
 
     /*
@@ -52,7 +52,7 @@ class Customer extends Person {
     (I did a little bit of searching to create such a method but the concept of this
     implementation was in workshop7 documents)
      */
-    public static Customer create(String name, String phone, String customerId,  int loyaltyPoints) {
+    public static Customer create(String name, String phone, String customerId) {
         if (name.isEmpty()) {
             System.out.println("Error: Customer name is empty.");
             return null;
@@ -65,11 +65,7 @@ class Customer extends Person {
             }
         }
 
-        int LoyaltyP = loyaltyPoints;
-        if (loyaltyPoints < 0) {
-            System.out.println("Error: loyalty points cannot be negative. setting loyalty points to 0");
-            LoyaltyP = 0;
-        }
+
 
         if (customerId.length() != 4){
             System.out.println("Error: Customer id cannot be more than 4 characters.");
@@ -90,7 +86,11 @@ class Customer extends Person {
             }
         }
 
-        return new Customer(name, phone, customerId, LoyaltyP);
+        return new Customer(name, phone, customerId);
+    }
+
+    public double getLoyaltyPoints() {
+        return loyaltyPoints;
     }
 
     public void addLoyaltyPoints(double purchase) {
