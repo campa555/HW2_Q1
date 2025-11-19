@@ -108,3 +108,61 @@ class Customer extends Person {
                 + getPhone() + ", Loyalty points: " + loyaltyPoints;
     }
 }
+
+
+class Employee extends Person {
+    private String employeeId;
+    private String position;
+    private double salary;
+    private int hoursWorked;
+
+    private Employee(String name, String phone, String employeeId, String position, double salary, int houseWorked) {
+        super(name, phone);
+        this.employeeId = employeeId;
+        this.position = position;
+        this.salary = salary;
+        this.hoursWorked = houseWorked;
+    }
+
+    public Employee create(String name, String phone, String employeeId, String position, double salary, int houseWorked) {
+        if (name.isEmpty()) return null;
+
+        if (phone.isEmpty()) return null;
+        for (int i=0; i<phone.length(); i++) {
+            if ( !Character.isDigit(phone.charAt(i)) ) {
+                System.out.println("Error: Invalid phone number");
+                return null;
+            }
+        }
+
+        if (employeeId.length() != 4 || employeeId.charAt(0) != 'E') return null;
+        else {
+            for (int i=1; i<employeeId.length(); i++) {
+                if ( !Character.isDigit(employeeId.charAt(i)) ) {
+                    System.out.println("Error: invalid employee id.");
+                    return null;
+                }
+            }
+        }
+
+        if (salary < 0 ) return null;
+
+        if (houseWorked < 160 ) return null;
+
+        return new Employee(name, phone, employeeId, position, salary, houseWorked);
+    }
+
+    public void addHoursWorked(int hours) {
+        this.hoursWorked += hours;
+    }
+
+    public double calculateSalary(){
+        return salary + (salary*1.5)*(hoursWorked-160)/160;
+    }
+
+    @Override
+    public String getInfo() {
+        return "ID: " + employeeId + ", Name: " + getName() + ", Phone: " +  getPhone()
+                + ", Position: " + this.position + ", Hours worked: " + this.hoursWorked;
+    }
+}
