@@ -52,7 +52,7 @@ class Customer extends Person {
     (I did a little bit of searching to create such a method but the concept of this
     implementation was in workshop7 documents)
      */
-    public Customer create(String name, String phone, String customerId,  int loyaltyPoints) {
+    public static Customer create(String name, String phone, String customerId,  int loyaltyPoints) {
         if (name.isEmpty()) {
             System.out.println("Error: Customer name is empty.");
             return null;
@@ -76,7 +76,7 @@ class Customer extends Person {
             return null;
         }
         else {
-            if (customerId.charAt(0) != 'c') {
+            if (customerId.charAt(0) != 'c' && customerId.charAt(0) != 'C') {
                 System.out.println("Error: invalid customer id.");
                 return null;
             }
@@ -124,7 +124,7 @@ class Employee extends Person {
         this.hoursWorked = houseWorked;
     }
 
-    public Employee create(String name, String phone, String employeeId, String position, double salary, int houseWorked) {
+    public static Employee create(String name, String phone, String employeeId, String position, double salary, int houseWorked) {
         if (name.isEmpty()) return null;
 
         if (phone.isEmpty()) return null;
@@ -135,7 +135,7 @@ class Employee extends Person {
             }
         }
 
-        if (employeeId.length() != 4 || employeeId.charAt(0) != 'E') return null;
+        if (employeeId.length() != 4 || employeeId.charAt(0) != 'E' || employeeId.charAt(0) != 'e') return null;
         else {
             for (int i=1; i<employeeId.length(); i++) {
                 if ( !Character.isDigit(employeeId.charAt(i)) ) {
