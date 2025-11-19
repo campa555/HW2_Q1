@@ -1,36 +1,38 @@
 import java.util.ArrayList;
 
 public class Order {
-    private int orderId = 0;
+    private static int orderId = 0;
     private Customer customer;
-    private ArrayList<MenuItem> Items;
+    private ArrayList<MenuItem> items;
     private double totalAmount;
 
     Order(Customer customer) {
         this.orderId++;
         this.customer = customer;
+        this.items = new ArrayList<MenuItem>();
     }
 
     public void addItem(MenuItem item){
-        Items.add(item);
+        items.add(item);
     }
 
     public double calculateTotal() {
         totalAmount = 0;
-        for (MenuItem item : Items) {
+        for (MenuItem item : items) {
             totalAmount += item.getPrice();
         }
         totalAmount = customer.getDiscount(totalAmount);
+        customer.addLoyaltyPoints(totalAmount);
         return totalAmount;
     }
 
     public String getOrderSummary(){
-        String temp =  "Order ID: " + orderId + ", Customer: " + customer.getName()
+        String temp =  "OrderID: " + orderId + ", Customer: " + customer.getName()
                 + ", Total Amount: " + calculateTotal() + '\n'
-                + ", Items: ";
+                + "Items: ";
 
-        for (int i = 0; i < Items.size(); i++) {
-            temp +=  this.Items.get(i).getName() + (i == Items.size() - 1 ? "" : " - ");
+        for (int i = 0; i < items.size(); i++) {
+            temp +=  this.items.get(i).getName() + (i == items.size() - 1 ? "" : " - ");
         }
 
         return temp;
